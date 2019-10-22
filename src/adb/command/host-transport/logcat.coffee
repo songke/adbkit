@@ -7,7 +7,7 @@ class LogcatCommand extends Command
     # For some reason, LG G Flex requires a filter spec with the -B option.
     # It doesn't actually use it, though. Regardless of the spec we always get
     # all events on all devices.
-    cmd = 'logcat -B *:I 2>/dev/null'
+    cmd = 'logcat *:I 2>/dev/null'
     cmd = "logcat -c 2>/dev/null && #{cmd}" if options.clear
     this._send "shell:echo && #{cmd}"
     @parser.readAscii 4

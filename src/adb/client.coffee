@@ -240,7 +240,7 @@ class Client
         new RemountCommand transport
           .execute()
       .nodeify callback
-      
+
    root: (serial, callback) ->
     this.transport serial
       .then (transport) ->
@@ -338,6 +338,7 @@ class Client
           .execute options
       .then (stream) ->
         Logcat.readStream stream,
+          format: "normal",
           fixLineFeeds: false
       .nodeify callback
 

@@ -12,13 +12,13 @@ LogcatCommand = require '../../../../src/adb/command/host-transport/logcat'
 
 describe 'LogcatCommand', ->
 
-  it "should send 'echo && logcat -B *:I'", (done) ->
+  it "should send 'echo && logcat *:I'", (done) ->
     conn = new MockConnection
     cmd = new LogcatCommand conn
     conn.socket.on 'write', (chunk) ->
       expect(chunk.toString()).to.equal \
         Protocol.encodeData('shell:echo &&
-          logcat -B *:I 2>/dev/null').toString()
+          logcat *:I 2>/dev/null').toString()
     setImmediate ->
       conn.socket.causeRead Protocol.OKAY
       conn.socket.causeEnd()
@@ -26,14 +26,14 @@ describe 'LogcatCommand', ->
       .then (stream) ->
         done()
 
-  it "should send 'echo && logcat -c && logcat -B *:I' if options.clear
+  it "should send 'echo && logcat -c && logcat *:I' if options.clear
       is set", (done) ->
     conn = new MockConnection
     cmd = new LogcatCommand conn
     conn.socket.on 'write', (chunk) ->
       expect(chunk.toString()).to.equal \
         Protocol.encodeData('shell:echo && logcat -c 2>/dev/null &&
-          logcat -B *:I 2>/dev/null').toString()
+          logcat *:I 2>/dev/null').toString()
     setImmediate ->
       conn.socket.causeRead Protocol.OKAY
       conn.socket.causeEnd()
