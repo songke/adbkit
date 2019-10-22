@@ -64,7 +64,7 @@ var Client = (function() {
   let NoUserOptionError = undefined
   Client = class Client {
     static initClass() {
-  
+
       NoUserOptionError = err => err.message.indexOf('--user') !== -1
     }
     constructor(options = {}) {
@@ -264,7 +264,7 @@ var Client = (function() {
           new RemountCommand(transport)
             .execute()).nodeify(callback)
     }
-      
+
     root(serial, callback) {
       return this.transport(serial)
         .then(transport =>
@@ -368,7 +368,7 @@ var Client = (function() {
           new LogcatCommand(transport)
             .execute(options)).then(stream =>
           Logcat.readStream(stream,
-            {fixLineFeeds: false})).nodeify(callback)
+            {format: "normal",fixLineFeeds: false})).nodeify(callback)
     }
 
     openProcStat(serial, callback) {
